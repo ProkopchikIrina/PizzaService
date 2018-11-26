@@ -22,11 +22,7 @@ public class ProductService implements IProductService {
     public ProductService(ProductRepository productRepository) {
         this.productRepository = productRepository;
     }
-    /**
-     * Find all users
-     *
-     * @return all users
-     */
+
     @Override
     public List<Product> findAll() {
         return productRepository.findAll();
@@ -37,12 +33,6 @@ public class ProductService implements IProductService {
         productRepository.deleteById(id);
     }
 
-    /**
-     * Save product and return saved object
-     *
-     * @param product saved product
-     * @return saved product
-     */
     @Override
     public Product save(Product product) {
         return productRepository.save(product);

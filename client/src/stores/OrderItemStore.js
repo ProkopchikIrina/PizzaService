@@ -1,27 +1,18 @@
-import React from "react";
-import {observable, action} from "mobx";
+import {observable} from "mobx";
 
 const ORDER_ITEMS_URL = 'api/orderItems';
-
 export default class OrderItemStore {
   @observable
-  orders = [];
+  orderItems = [];
 
-  create(orderItemDetails) {
-    const params = {
-      method : 'POST',
-      body   : JSON.stringify(orderItemDetails),
-      headers: {'Content-Type': 'application/json'}
-    };
-    fetch(ORDER_ITEMS_URL, params)
-      .then(response => response.json())
-      .then(action(product => this.orders.push(product)))
-      .catch(e => console.log(e));
+  addToShoppingCart(orderItemDetails) {
+    this.orderItems.push(orderItemDetails);
   }
-  loadAll() {
-    fetch(ORDER_ITEMS_URL)
+
+  loadAllOfOrder(orderId) {
+    fetch(ORDER_ITEMS_URL + "/" + orderId)
       .then(response => response.json())
-      .then(action(products => this.orders = products))
-      .catch(error => console.error(error.message))
+      .then(orderItems => {return orderItems})
+      .catch(error => console.error(error.message));
   }
 }

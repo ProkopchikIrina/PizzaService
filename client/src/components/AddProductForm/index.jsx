@@ -1,9 +1,13 @@
 import React from "react";
 import {inject, observer} from "mobx-react";
+import {Button, Card, CardBody, CardTitle, Col, Container, Form, FormGroup, Input, Label, Row} from 'reactstrap';
 
 @inject('productStore')
 @observer
 export default class AddProductForm extends React.Component {
+  /**
+   * Constructor of class
+   */
   constructor(props) {
     super(props);
     this.state = {title: '', ingredients: '', price: '', weight: ''};
@@ -13,6 +17,48 @@ export default class AddProductForm extends React.Component {
     this.handlePriceChange       = this.handlePriceChange.bind(this);
     this.handleWeightChange      = this.handleWeightChange.bind(this);
     this.handleSubmit            = this.handleSubmit.bind(this);
+  }
+
+  /**
+   * Renders component
+   * @returns rendered component
+   */
+  render() {
+    return (
+      <Container>
+        <Row>
+          <Col sm={{size: 10, order: 1, offset: 1}}>
+            <Card>
+              <CardBody>
+                <CardTitle>Добавить пользователя</CardTitle>
+                <Form onSubmit={this.handleSubmit}>
+                  <FormGroup>
+                    <Label for="title">Название</Label>
+                    <Input type="text" name="title" id="title" placeholder="Введите название продукта" value={this.state.title}
+                           onChange={this.handleTitleChange}/>
+                  </FormGroup>
+                  <FormGroup>
+                    <Label for="examplePassword">Состав</Label>
+                    <Input type="text" name="ingredients" id="examplePassword" placeholder="Введите состав" value={this.state.ingredients}
+                           onChange={this.handleIngredientsChange}/>
+                  </FormGroup>
+                  <FormGroup>
+                    <Label for="weight">Вес</Label>
+                    <Input type="number" name="weight" id="weight" placeholder="Введите вес" value={this.state.weight} onChange={this.handleWeightChange}/>
+                  </FormGroup>
+                  <FormGroup>
+                    <Label for="price">Цена</Label>
+                    <Input type="number" name="price" id="price" placeholder="Введите цену" value={this.state.price} onChange={this.handlePriceChange}/>
+                  </FormGroup>
+                  <Button>Добавить</Button>
+                </Form>
+              </CardBody>
+            </Card>
+          </Col>
+        </Row>
+      </Container>
+    )
+      ;
   }
 
   handleTitleChange(event) {
@@ -32,32 +78,8 @@ export default class AddProductForm extends React.Component {
   }
 
   handleSubmit(event) {
-    alert('A name was submitted: ' + this.state.title + this.state.ingredients + this.state.weight);
     event.preventDefault();
     this.props.productStore.create(this.state);
-  }
-
-  render() {
-    return (
-      <form onSubmit={this.handleSubmit}>
-        <label>
-          Title:
-          <input type="text" value={this.state.title} onChange={this.handleTitleChange}/>
-        </label><br/>
-        <label>
-          Ingredients:
-          <input type="text" value={this.state.ingredients} onChange={this.handleIngredientsChange}/>
-        </label><br/>
-        <label>
-          Price:
-          <input type="number" value={this.state.price} onChange={this.handlePriceChange}/>
-        </label><br/>
-        <label>
-          Weight:
-          <input type="number" value={this.state.weight} onChange={this.handleWeightChange}/>
-        </label><br/>
-        <input type="submit" value="Submit"/>
-      </form>
-    );
+    this.forceUpdate();
   }
 }

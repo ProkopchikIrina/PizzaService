@@ -20,16 +20,18 @@ public class OrderItemController {
 
     /**
      * Constructor of class
+     *
      * @param orderItemService order item service
      */
     public OrderItemController(OrderItemService orderItemService) {
         this.orderItemService = orderItemService;
     }
+
     /**
      * Get all orders
      */
     @GetMapping
-    public List<OrderItem> findAll(){
+    public List<OrderItem> findAll() {
         log.info("Find all orders");
         return orderItemService.findAll();
     }
@@ -41,5 +43,14 @@ public class OrderItemController {
     public OrderItem create(@RequestBody OrderItem orderItem) {
         log.info("Added new orderItem for order: {}", orderItem.order);
         return orderItemService.save(orderItem);
+    }
+
+    /**
+     * Get all {@link OrderItem}s by order id
+     */
+    @GetMapping("/{id}")
+    public List<OrderItem> findAllOfOrder(@PathVariable("id")  int id) {
+        log.info("Find all items of order with id " + id);
+        return orderItemService.findAllByOrderId(id);
     }
 }

@@ -42,4 +42,13 @@ public class OrderController {
         log.info("Created new order with address: {}", order.address);
         return orderService.save(order);
     }
+
+    /**
+     * Update status of {@link Order}
+     */
+    @PutMapping
+    public void updateStatus(@RequestBody Order order) {
+        log.info("Created new order with address: {}", order.getId());
+        orderService.updateStatus(order.getId(), order.status);
+    }
 }

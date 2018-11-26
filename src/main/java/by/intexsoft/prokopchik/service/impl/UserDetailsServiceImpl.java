@@ -17,7 +17,6 @@ import java.util.Set;
 /**
  * Implementation of UserDetailsService
  */
-@Slf4j
 @Service
 public class UserDetailsServiceImpl implements UserDetailsService {
     @Autowired

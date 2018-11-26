@@ -1,4 +1,3 @@
-import React from "react";
 import {observable, action} from "mobx";
 
 const PRODUCTS_URL = 'api/products';
@@ -19,6 +18,7 @@ export default class ProductStore {
       .then(action(product => this.products.push(product)))
       .catch(e => console.log(e));
   }
+
   loadAll() {
     fetch(PRODUCTS_URL)
       .then(response => response.json())
@@ -31,6 +31,7 @@ export default class ProductStore {
       .then(() => this.deleteHandler(identity))
       .catch(e => console.error(e.message))
   }
+
   @action
   deleteHandler(identity) {
     const itemIndex = this.products.findIndex(({id}) => id === identity);
@@ -38,5 +39,4 @@ export default class ProductStore {
       this.products.splice(itemIndex, 1);
     }
   }
-
 }

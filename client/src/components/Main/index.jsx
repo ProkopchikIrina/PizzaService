@@ -1,38 +1,36 @@
 import React from "react";
-import {Switch, Route, Link} from 'react-router-dom';
+import {Switch, Route} from 'react-router-dom';
 
 import Admin from "../Admin"
 import Login from "../Login";
 import WelcomePage from "../WelcomePage";
 import ProductsList from "../ProductsList"
-import OrdersListTable from '../OrdersListTable';
+import OrdersTable from '../OrdersTable';
+import ShoppingCart from '../ShoppingCart';
+import OrderDetailsForm from '../OrderDetailsForm';
+import MenuHeader from '../MenuHeader';
+import AlertOrderCompleted from '../AlertOrderCompleted';
 
-class Main extends React.Component {
+export default class Main extends React.Component {
+  /**
+   * Renders component
+   * @returns rendered component
+   */
   render() {
     return (
       <div>
-        <ul>
-          <li><Link to="/login">Login</Link></li>
-          <li><Link to="/hello">Hello</Link></li>
-
-          <li><Link to="/administration">Admin</Link></li>
-
-          <li><Link to="/products">Products</Link></li>
-          <li><Link to="/orders">Orders</Link></li>
-        </ul>
+        <MenuHeader/>
         <Switch>
           <Route path="/hello" component={WelcomePage}/>
           <Route path="/login" component={Login}/>
-
           <Route path="/administration" component={Admin}/>
-
           <Route path="/products" component={ProductsList}/>
-
-          <Route path="/orders" component={OrdersListTable}/>
+          <Route path="/orders" component={OrdersTable}/>
+          <Route path="/shoppingCart" component={ShoppingCart}/>
+          <Route path="/orderDetails" component={OrderDetailsForm}/>
+          <Route path="/orderCompleted" component={AlertOrderCompleted}/>
         </Switch>
       </div>
     )
   };
 }
-
-export default Main;

@@ -11,7 +11,11 @@ import java.util.List;
 @Service
 public class OrderItemService implements IOrderItemService {
     private final OrderItemRepository orderItemRepository;
-
+    /**
+     * Constructor of class
+     *
+     * @param orderItemRepository order item repository
+     */
     public OrderItemService(OrderItemRepository orderItemRepository) {
         this.orderItemRepository = orderItemRepository;
     }
@@ -24,5 +28,10 @@ public class OrderItemService implements IOrderItemService {
     @Override
     public OrderItem save(OrderItem orderItem) {
         return orderItemRepository.save(orderItem);
+    }
+
+    @Override
+    public List<OrderItem> findAllByOrderId(int orderId) {
+        return orderItemRepository.findAllByOrder_Id(orderId);
     }
 }

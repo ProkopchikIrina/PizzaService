@@ -34,7 +34,6 @@ public class ProductController {
         return productService.findAll();
     }
 
-
     /**
      * Delete {@link Product} by id
      */

@@ -1,4 +1,3 @@
-import React from "react";
 import {observable, action} from "mobx";
 
 const USERS_URL = 'api/users';

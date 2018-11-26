@@ -1,6 +1,6 @@
 import {action, observable} from "mobx";
 
-const CONTEXT_URL = process.env.REACT_APP_API_URL || '';
+const LOGIN_URL = 'http://localhost:8080/PizzaService/login';
 
 export default class AuthStore {
   @observable
@@ -20,7 +20,7 @@ export default class AuthStore {
   }
 
   completeRequest(params) {
-    fetch('http://localhost:8080/PizzaService/login', params)
+    fetch(LOGIN_URL, params)
       .then(response => response.json())
       .then(action(user => {
         this.user = user;
@@ -32,16 +32,15 @@ export default class AuthStore {
       });
   }
 
-  formRequestBody(userParams) {
+  formRequestBody = (userParams) => {
     let formData = [];
-    for (let parameter in userParams) {
-      formData.push(encodeURIComponent(parameter) + '=' + encodeURIComponent(userParams[parameter]));
-    }
+    formData.push(encodeURIComponent("username") + '=' + encodeURIComponent(userParams.username));
+    formData.push(encodeURIComponent("password") + '=' + encodeURIComponent(userParams.password));
     return formData.join('&');
-  }
+  };
 
   logOut() {
-    fetch(CONTEXT_URL + 'hello', {method: 'POST'})
+    fetch('hello', {method: 'POST'})
       .then(() => this.user = null)
       .catch(e => console.log(e));
   }

@@ -8,18 +8,27 @@ import java.util.List;
  * Service for working with {@link User}
  */
 public interface IUserService {
+
     /**
-     * Find user by name
+     * Find {@link User} by username
+     *
+     * @param username user's username
+     * @return user
      */
     User findByUsername(String username);
 
     /**
-     * Find all user
+     * Find all {@link User}s
+     *
+     * @return list of all users
      */
     List<User> findAll();
 
     /**
-     * Add user to DB
+     * Save {@link User} and return saved object
+     *
+     * @param user saved user
+     * @return saved user
      */
     User save(User user);
 }

@@ -2,10 +2,10 @@ package by.intexsoft.prokopchik.entity;
 
 import org.springframework.data.jpa.domain.AbstractPersistable;
 
-import javax.persistence.Column;
-import javax.persistence.Entity;
+import javax.persistence.*;
 import java.sql.Time;
 import java.util.Date;
+import java.util.List;
 
 /**
  * Order entity
@@ -41,4 +41,11 @@ public class Order extends AbstractPersistable<Integer> {
      */
     @Column
     public String status;
+
+//    /**
+//     * Contains order items
+//     */
+//    @OneToMany(fetch = FetchType.EAGER)
+//    @JoinColumn(name = "order_id", referencedColumnName = "id")
+//    public List<OrderItem> orderItems;
 }

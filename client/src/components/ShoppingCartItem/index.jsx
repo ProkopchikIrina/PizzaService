@@ -1,20 +1,20 @@
 import React from "react";
 import {inject, observer} from "mobx-react/index";
-import {Button, Input} from 'reactstrap';
+import {Input} from 'reactstrap';
 
 @inject('orderItemStore')
 @observer
-export default class ProductsListItem extends React.Component {
+export default class ShoppingCartItem extends React.Component {
   /**
    * Constructor of class
    */
   constructor(props) {
     super(props);
+    // this.getInitialState();
     this.state             = {
-      count  : 1,
+      count  : this.props.count,
       product: this.props.product
     };
-    //   this.getInitialState();
     this.handleCountChange = this.handleCountChange.bind(this);
   }
 
@@ -26,10 +26,9 @@ export default class ProductsListItem extends React.Component {
     return (
       <tr>
         <td>{this.state.product.title}</td>
-        <td>{this.state.product.price} б. р.</td>
-        <td>{this.state.product.weight} г.</td>
+        <td>{this.state.product.price}</td>
+        <td>{this.state.product.weight}</td>
         <td><Input type="number" value={this.state.count} onChange={this.handleCountChange}/></td>
-        <td><Button onClick={() => this.addToCart(this.state.product, this.state.count)}>Добавить в корзину</Button></td>
       </tr>
     );
   }
@@ -42,12 +41,8 @@ export default class ProductsListItem extends React.Component {
 
   getInitialState() {
     this.setState({
-      count: 1
+      count  : this.props.count,
+      product: this.props.product
     });
-  }
-
-  addToCart(product, count) {
-    let orderItem = {product: product, count: count};
-    this.props.orderItemStore.addToShoppingCart(orderItem);
   }
 }
