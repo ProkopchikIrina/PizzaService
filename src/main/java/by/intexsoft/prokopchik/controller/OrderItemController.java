@@ -9,7 +9,7 @@ import org.springframework.web.bind.annotation.*;
 import java.util.List;
 
 /**
- * Controller for working with {@link OrderItem}
+ * Controller for work with {@link OrderItem}
  */
 @Slf4j
 @CrossOrigin
@@ -28,11 +28,11 @@ public class OrderItemController {
     }
 
     /**
-     * Get all orders
+     * Get all order items
      */
     @GetMapping
     public List<OrderItem> findAll() {
-        log.info("Find all orders");
+        log.info("Find all order items");
         return orderItemService.findAll();
     }
 

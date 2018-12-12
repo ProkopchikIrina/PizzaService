@@ -1,10 +1,12 @@
 package by.intexsoft.prokopchik.entity;
 
+import com.fasterxml.jackson.annotation.JsonBackReference;
+import com.fasterxml.jackson.annotation.JsonProperty;
+import lombok.Getter;
+import lombok.extern.slf4j.Slf4j;
 import org.springframework.data.jpa.domain.AbstractPersistable;
 
 import javax.persistence.*;
-import java.sql.Time;
-import java.util.Date;
 import java.util.List;
 
 /**
@@ -22,13 +24,13 @@ public class Order extends AbstractPersistable<Integer> {
      * Contains order time
      */
     @Column
-    public Time time;
+    public String time;
 
     /**
      * Contains order date
      */
     @Column
-    public Date date;
+    public String date;
 
     /**
      * Contains phone number
@@ -42,10 +44,11 @@ public class Order extends AbstractPersistable<Integer> {
     @Column
     public String status;
 
-//    /**
-//     * Contains order items
-//     */
-//    @OneToMany(fetch = FetchType.EAGER)
-//    @JoinColumn(name = "order_id", referencedColumnName = "id")
-//    public List<OrderItem> orderItems;
+    /**
+     * Contains order items
+     */
+    @JsonBackReference
+    @OneToMany(fetch = FetchType.EAGER,cascade=CascadeType.ALL)
+    @JoinColumn(name = "order_id", referencedColumnName = "id")
+    public List<OrderItem> orderItems;
 }

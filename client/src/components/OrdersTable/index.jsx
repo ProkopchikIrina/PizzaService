@@ -5,7 +5,6 @@ import {Table} from 'reactstrap';
 import OrdersTableRow from '../OrdersTableRow'
 
 @inject('orderStore')
-@inject('orderItemStore')
 @observer
 export default class OrdersTable extends React.Component {
   /**
@@ -34,7 +33,7 @@ export default class OrdersTable extends React.Component {
           <th>Статус</th>
         </tr>
         </thead>
-        {orders.map(order => (<OrdersTableRow order={order}/>))}
+        {orders.map((order) => (<OrdersTableRow order={order}/>))}
       </Table>
     );
   }
@@ -42,5 +41,4 @@ export default class OrdersTable extends React.Component {
   loadAll() {
     this.props.orderStore.loadAll();
   }
-
 }

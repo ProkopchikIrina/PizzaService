@@ -1,11 +1,22 @@
 import {action, observable} from "mobx";
 
-const LOGIN_URL = 'http://localhost:8080/PizzaService/login';
-
-export default class AuthStore {
+const LOGIN_URL = 'loginHandler';
+const LOGOUT_URL = 'logout';
+/**
+ * Store for working with user's authentication
+ */
+export default class UserAuthStore {
+  /**
+   * Contains authenticated user
+   */
   @observable
   user = null;
 
+  /**
+   * Sing-in method
+   * @param username
+   * @param password
+   */
   signIn(username, password) {
     const userParams = {
       username: username,
@@ -19,28 +30,37 @@ export default class AuthStore {
     this.completeRequest(params);
   }
 
+  /**
+   * Method for performing login request
+   * @param params
+   */
   completeRequest(params) {
     fetch(LOGIN_URL, params)
       .then(response => response.json())
       .then(action(user => {
         this.user = user;
-        return true;
+        console.log(user.username);
       }))
-      .catch(e => {
-        console.log(e);
-        return false;
-      });
+      .catch(console.log);
   }
 
+  /**
+   * Method for forming request body
+   * @param userParams
+   * @returns {string}
+   */
   formRequestBody = (userParams) => {
-    let formData = [];
-    formData.push(encodeURIComponent("username") + '=' + encodeURIComponent(userParams.username));
-    formData.push(encodeURIComponent("password") + '=' + encodeURIComponent(userParams.password));
-    return formData.join('&');
+    let credentials = [];
+    credentials.push(encodeURIComponent("username") + '=' + encodeURIComponent(userParams.username));
+    credentials.push(encodeURIComponent("password") + '=' + encodeURIComponent(userParams.password));
+    return credentials.join('&');
   };
 
+  /**
+   * Method for user logout
+   */
   logOut() {
-    fetch('hello', {method: 'POST'})
+    fetch(LOGOUT_URL, {method: 'GET'})
       .then(() => this.user = null)
       .catch(e => console.log(e));
   }

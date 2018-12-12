@@ -2,7 +2,7 @@ import React from "react";
 import {inject, observer} from "mobx-react";
 import {Button, Card, CardBody, CardTitle, Col, Container, Form, FormGroup, Input, Label, Row} from 'reactstrap';
 
-@inject('productStore')
+@inject('productStore','userAuthStore')
 @observer
 export default class AddProductForm extends React.Component {
   /**
@@ -24,13 +24,21 @@ export default class AddProductForm extends React.Component {
    * @returns rendered component
    */
   render() {
+    if (this.props.userAuthStore.user == null) {
+      return (
+        <div>
+          <h5>У Вас недостаточно прав для просмотра данной страницы</h5>
+          <Button color="secondary" size="lg" block href="#/login">Войти</Button>
+        </div>
+      )
+    }
     return (
       <Container>
         <Row>
           <Col sm={{size: 10, order: 1, offset: 1}}>
             <Card>
               <CardBody>
-                <CardTitle>Добавить пользователя</CardTitle>
+                <CardTitle>Добавить продукт</CardTitle>
                 <Form onSubmit={this.handleSubmit}>
                   <FormGroup>
                     <Label for="title">Название</Label>
@@ -50,7 +58,7 @@ export default class AddProductForm extends React.Component {
                     <Label for="price">Цена</Label>
                     <Input type="number" name="price" id="price" placeholder="Введите цену" value={this.state.price} onChange={this.handlePriceChange}/>
                   </FormGroup>
-                  <Button>Добавить</Button>
+                  <Button color="secondary" size="lg" block disabled={this.checkRequiredFieldsState()}>Добавить</Button>
                 </Form>
               </CardBody>
             </Card>
@@ -61,25 +69,53 @@ export default class AddProductForm extends React.Component {
       ;
   }
 
+  /**
+   * Handles changes in title input field
+   * @param event
+   */
   handleTitleChange(event) {
     this.setState({title: event.target.value});
   }
 
+  /**
+   * Handles changes in ingredients input field
+   * @param event
+   */
   handleIngredientsChange(event) {
     this.setState({ingredients: event.target.value});
   }
 
+  /**
+   * Handles changes in price input field
+   * @param event
+   */
   handlePriceChange(event) {
     this.setState({price: event.target.value});
   }
 
+  /**
+   * Handles changes in weight input field
+   * @param event
+   */
   handleWeightChange(event) {
     this.setState({weight: event.target.value});
   }
 
+  /**
+   * Handles form submit
+   * @param event
+   */
   handleSubmit(event) {
     event.preventDefault();
     this.props.productStore.create(this.state);
-    this.forceUpdate();
+    this.setState({title: '', ingredients: '', price: '', weight: ''});
+  }
+
+  /**
+   * Checks state of required fields
+   */
+  checkRequiredFieldsState() {
+    let state = this.state;
+    return !(state.title && state.ingredients && state.price && state.weight);
   }
 }

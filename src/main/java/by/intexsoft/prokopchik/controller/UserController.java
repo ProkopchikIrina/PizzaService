@@ -9,7 +9,7 @@ import org.springframework.web.bind.annotation.*;
 import java.util.List;
 
 /**
- * Controller for working with {@link User}
+ * Controller for work with {@link User}
  */
 @Slf4j
 @CrossOrigin
@@ -42,5 +42,14 @@ public class UserController {
     public User create(@RequestBody User user) {
         log.info("Created new user with name: {}", user.username);
         return userService.save(user);
+    }
+
+    /**
+     * Delete {@link User} by id
+     */
+    @DeleteMapping("/{id}")
+    public void delete(@PathVariable("id") int id) {
+        log.info("Delete user with id: {}", id);
+        userService.delete(id);
     }
 }

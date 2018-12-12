@@ -22,6 +22,12 @@ public class User extends AbstractPersistable<Integer> {
     public String password;
 
     /**
+     * Contains user e-mail
+     */
+    @Column
+    public String email;
+
+    /**
      * Contains {@link Role}
      */
     @ManyToOne(fetch = FetchType.EAGER)

@@ -1,15 +1,19 @@
 import React from "react";
-import {Switch, Route} from 'react-router-dom';
+import {Route, Switch} from 'react-router-dom';
 
-import Admin from "../Admin"
-import Login from "../Login";
-import WelcomePage from "../WelcomePage";
-import ProductsList from "../ProductsList"
-import OrdersTable from '../OrdersTable';
-import ShoppingCart from '../ShoppingCart';
-import OrderDetailsForm from '../OrderDetailsForm';
 import MenuHeader from '../MenuHeader';
+import AlertUserAdded from '../AlertUserAdded';
+import ShoppingCart from '../ShoppingCart';
 import AlertOrderCompleted from '../AlertOrderCompleted';
+import ProductsList from '../ProductsList';
+import OrderDetailsForm from '../OrderDetailsForm';
+import Login from '../Login';
+import Admin from '../Admin';
+import OrdersTable from '../OrdersTable';
+import AlertProductAdded from '../AlertProductAdded';
+import AddProductForm from '../AddProductForm';
+import AddUserForm from '../AddUserForm';
+import UsersTable from '../UsersTable';
 
 export default class Main extends React.Component {
   /**
@@ -21,14 +25,18 @@ export default class Main extends React.Component {
       <div>
         <MenuHeader/>
         <Switch>
-          <Route path="/hello" component={WelcomePage}/>
           <Route path="/login" component={Login}/>
           <Route path="/administration" component={Admin}/>
+          <Route path="/addProduct" component={AddProductForm}/>
+          <Route path="/addUser" component={AddUserForm}/>
           <Route path="/products" component={ProductsList}/>
           <Route path="/orders" component={OrdersTable}/>
           <Route path="/shoppingCart" component={ShoppingCart}/>
           <Route path="/orderDetails" component={OrderDetailsForm}/>
           <Route path="/orderCompleted" component={AlertOrderCompleted}/>
+          <Route path="/userAdded" component={AlertUserAdded}/>
+          <Route path="/productAdded" component={AlertProductAdded}/>
+          <Route path="/usersTable" component={UsersTable}/>
         </Switch>
       </div>
     )

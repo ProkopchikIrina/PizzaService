@@ -1,6 +1,7 @@
 import React from "react";
 import {inject, observer} from "mobx-react/index";
-import {Input} from 'reactstrap';
+import {Input, Button} from 'reactstrap';
+import './style.css';
 
 @inject('orderItemStore')
 @observer
@@ -10,7 +11,6 @@ export default class ShoppingCartItem extends React.Component {
    */
   constructor(props) {
     super(props);
-    // this.getInitialState();
     this.state             = {
       count  : this.props.count,
       product: this.props.product
@@ -26,9 +26,11 @@ export default class ShoppingCartItem extends React.Component {
     return (
       <tr>
         <td>{this.state.product.title}</td>
-        <td>{this.state.product.price}</td>
-        <td>{this.state.product.weight}</td>
-        <td><Input type="number" value={this.state.count} onChange={this.handleCountChange}/></td>
+        <td>{this.state.product.ingredients}</td>
+        <td>{this.state.product.price} б. р.</td>
+        <td>{this.state.product.weight} г.</td>
+        <td><Input className="countInput" type="number" value={this.state.count} onChange={this.handleCountChange}/></td>
+        <td><Button onClick={() => this.deleteFromShoppingCart()}>Удалить из корзины</Button></td>
       </tr>
     );
   }
@@ -44,5 +46,10 @@ export default class ShoppingCartItem extends React.Component {
       count  : this.props.count,
       product: this.props.product
     });
+  }
+
+  deleteFromShoppingCart() {
+    console.log(this.state.product);
+    this.props.orderItemStore.deleteFromShoppingCart({product: this.state.product, count: this.props.count});
   }
 }

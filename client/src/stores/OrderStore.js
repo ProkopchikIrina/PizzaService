@@ -2,12 +2,22 @@ import {observable, action} from "mobx";
 
 const ORDERS_URL = 'api/orders';
 
+/**
+ * Store for working with orders
+ */
 export default class OrderStore {
+  /**
+   * Contains stored orders
+   * @type {Array}
+   */
   @observable
   orders = [];
 
+  /**
+   * Saves new order
+   * @param orderDetails
+   */
   create(orderDetails) {
-    console.log(orderDetails);
     const params = {
       method : 'POST',
       body   : JSON.stringify(orderDetails),
@@ -19,6 +29,9 @@ export default class OrderStore {
       .catch(e => console.log(e));
   }
 
+  /**
+   * Load all orders
+   */
   loadAll() {
     fetch(ORDERS_URL)
       .then(response => response.json())
@@ -26,9 +39,13 @@ export default class OrderStore {
       .catch(error => console.error(error.message))
   }
 
-
+  /**
+   * Update order status
+   * @param id
+   * @param status
+   */
   updateOrderStatus(id, status) {
-    fetch(ORDERS_URL, {method: 'PUT', body: {id: id, status: status}})
+    fetch(ORDERS_URL, {method: 'PUT', body: JSON.stringify({id: id, status: status}), headers: {'Content-Type': 'application/json'}})
       .catch(e => console.error(e.message))
   }
 }

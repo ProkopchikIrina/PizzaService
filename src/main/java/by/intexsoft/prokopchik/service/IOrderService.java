@@ -23,5 +23,10 @@ public interface IOrderService {
      */
     List<Order> findAll();
 
+    /**
+     * Update status of {@link Order}
+     * @param id order id
+     * @param status new status of order
+     */
     void updateStatus(int id, String status);
 }

@@ -1,5 +1,6 @@
 package by.intexsoft.prokopchik.entity;
 
+import com.fasterxml.jackson.annotation.JsonBackReference;
 import org.springframework.data.jpa.domain.AbstractPersistable;
 
 import javax.persistence.*;
@@ -12,7 +13,8 @@ public class OrderItem extends AbstractPersistable<Integer> {
     /**
      * Contains order
      */
-    @ManyToOne
+    @JsonBackReference
+    @ManyToOne(fetch = FetchType.EAGER)
     @JoinColumn(name = "order_id", referencedColumnName = "id")
     public Order order;
 

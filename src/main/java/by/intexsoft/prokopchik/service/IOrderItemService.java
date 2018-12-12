@@ -20,5 +20,10 @@ public interface IOrderItemService {
      */
     OrderItem save(OrderItem orderItem);
 
+    /**
+     * Find all {@link OrderItem}s by order id
+     * @param orderId id of order
+     * @return order items
+     */
     List<OrderItem> findAllByOrderId(int orderId);
 }

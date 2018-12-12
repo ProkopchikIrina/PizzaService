@@ -9,7 +9,7 @@ import org.springframework.web.bind.annotation.*;
 import java.util.List;
 
 /**
- * Controller for working with {@link Product}
+ * Controller for work with {@link Product}
  */
 @Slf4j
 @CrossOrigin

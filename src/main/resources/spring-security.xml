@@ -1,8 +1,8 @@
 <bean:beans xmlns="http://www.springframework.org/schema/security"
-         xmlns:bean="http://www.springframework.org/schema/beans"
-         xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance"
-         xmlns:security="http://www.springframework.org/schema/security"
-         xsi:schemaLocation="http://www.springframework.org/schema/beans http://www.springframework.org/schema/beans/spring-beans.xsd
+            xmlns:bean="http://www.springframework.org/schema/beans"
+            xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance"
+            xmlns:security="http://www.springframework.org/schema/security"
+            xsi:schemaLocation="http://www.springframework.org/schema/beans http://www.springframework.org/schema/beans/spring-beans.xsd
 	http://www.springframework.org/schema/security http://www.springframework.org/schema/security/spring-security.xsd">
 
     <bean:bean id="userDetailsServiceImpl" class="by.intexsoft.prokopchik.service.impl.UserDetailsServiceImpl"/>
@@ -14,17 +14,22 @@
         <intercept-url pattern="/api/users" access="permitAll"/>
 
         <csrf disabled="true"/>
-        <security:form-login login-processing-url="/login" username-parameter="username"
-                             password-parameter="password"/>
+        <security:form-login default-target-url="/api/doLogin"
+                             always-use-default-target="true"
+                             username-parameter="username"
+                             password-parameter="password"
+                             login-processing-url="/loginHandler"
+        />
+        <security:logout logout-url="/logout"
+                         logout-success-url="/"/>
     </http>
 
     <bean:bean id="encoder"
-            class="org.springframework.security.crypto.bcrypt.BCryptPasswordEncoder"/>
+               class="org.springframework.security.crypto.bcrypt.BCryptPasswordEncoder"/>
 
     <authentication-manager id="manager">
         <authentication-provider user-service-ref="userDetailsServiceImpl">
             <password-encoder ref="encoder"/>
         </authentication-provider>
     </authentication-manager>
-
 </bean:beans>

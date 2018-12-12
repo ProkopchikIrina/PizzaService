@@ -9,7 +9,7 @@ import org.springframework.web.bind.annotation.*;
 import java.util.List;
 
 /**
- * Controller for working with {@link Order}
+ * Controller for work with {@link Order}
  */
 @Slf4j
 @CrossOrigin

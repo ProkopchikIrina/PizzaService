@@ -2,10 +2,21 @@ import {observable, action} from "mobx";
 
 const PRODUCTS_URL = 'api/products';
 
+/**
+ * Store for working with products
+ */
 export default class ProductStore {
+  /**
+   * Contains stored products
+   * @type {Array}
+   */
   @observable
   products = [];
 
+  /**
+   * Saves new product
+   * @param productDetails
+   */
   create(productDetails) {
     console.log(productDetails);
     const params = {
@@ -19,6 +30,9 @@ export default class ProductStore {
       .catch(e => console.log(e));
   }
 
+  /**
+   * Load all products
+   */
   loadAll() {
     fetch(PRODUCTS_URL)
       .then(response => response.json())
@@ -26,15 +40,23 @@ export default class ProductStore {
       .catch(error => console.error(error.message))
   }
 
-  delete(identity) {
-    fetch(PRODUCTS_URL + "/" + identity, {method: 'DELETE'})
-      .then(() => this.deleteHandler(identity))
+  /**
+   * Deletes product by id
+   * @param id
+   */
+  delete(id) {
+    fetch(PRODUCTS_URL + "/" + id, {method: 'DELETE'})
+      .then(() => this.deleteHandler(id))
       .catch(e => console.error(e.message))
   }
 
+  /**
+   * Deletes product from products array by id
+   * @param id
+   */
   @action
-  deleteHandler(identity) {
-    const itemIndex = this.products.findIndex(({id}) => id === identity);
+  deleteHandler(id) {
+    const itemIndex = this.products.findIndex(({id}) => id === id);
     if (itemIndex > -1) {
       this.products.splice(itemIndex, 1);
     }

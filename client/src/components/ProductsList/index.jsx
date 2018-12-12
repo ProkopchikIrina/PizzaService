@@ -7,7 +7,6 @@ import ProductsListItem from '../ProductListItem'
 @inject('productStore')
 @observer
 export default class ProductsList extends React.Component {
-  counter;
 
   /**
    * Constructor of class

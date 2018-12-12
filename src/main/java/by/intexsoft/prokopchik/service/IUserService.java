@@ -31,4 +31,6 @@ public interface IUserService {
      * @return saved user
      */
     User save(User user);
+
+    void delete(int id);
 }

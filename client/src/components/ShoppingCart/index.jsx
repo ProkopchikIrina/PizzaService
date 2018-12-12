@@ -1,34 +1,34 @@
 import React from "react";
 import {inject, observer} from "mobx-react/index";
-import {Table, Button} from 'reactstrap';
+import {Button, Table} from 'reactstrap';
 
 import ShoppingCartItem from '../ShoppingCartItem'
 
-@inject('orderItemStore')
-@inject('orderStore')
+@inject('orderItemStore', 'orderStore')
 @observer
 export default class ShoppingCart extends React.Component {
-  /**
-   * Constructor of class
-   */
-  constructor(props) {
-    super(props);
-  }
-
   /**
    * Renders component
    * @returns rendered component
    */
   render() {
-    const {props: {orderItemStore: {orderItems}}} = this;
+    const {props: {orderItemStore: {shoppingCartItems}}} = this;
+    if (shoppingCartItems.length === 0) {
+      return (<h5>Ваша корзина пуста</h5>);
+    }
     return (
       <div>
         <Table>
-          {orderItems.map(({count, product}) => (<ShoppingCartItem count={count} product={product}/>))}
+          {shoppingCartItems.map(({count, product}) => (<ShoppingCartItem count={count} product={product}/>))}
         </Table>
+        <h5>Общая сумма: </h5> {this.getTotalSum()}
         <Button href="#/orderDetails">Оформить заказ</Button>
       </div>
     );
   }
 
+  getTotalSum() {
+    let total = 0;
+    return this.shoppingCartItems.map(({product: {price}, count}) => total += price * count);
+  }
 }

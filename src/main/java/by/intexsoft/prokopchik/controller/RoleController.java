@@ -12,7 +12,7 @@ import org.springframework.web.bind.annotation.RestController;
 import java.util.List;
 
 /**
- * Controller for working with {@link Role}
+ * Controller for work with {@link Role}
  */
 @Slf4j
 @CrossOrigin

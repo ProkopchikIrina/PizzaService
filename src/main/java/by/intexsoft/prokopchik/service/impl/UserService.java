@@ -40,4 +40,9 @@ public class UserService implements IUserService {
         user.password = bCryptPasswordEncoder.encode(user.password);
         return userRepository.save(user);
     }
+
+    @Override
+    public void delete(int id) {
+        userRepository.deleteById(id);
+    }
 }
