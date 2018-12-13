@@ -2,15 +2,10 @@ import React from "react";
 import {inject, observer} from "mobx-react/index";
 import {Redirect} from "react-router";
 import {Button, Card, CardBody, CardTitle, Col, Container, Form, FormGroup, Input, Label, Row} from 'reactstrap';
-import AlertOrderCompleted from '../AlertOrderCompleted';
 
 @inject('orderItemStore', 'orderStore')
 @observer
 export default class OrderDetailsForm extends React.Component {
-
-  /**
-   * Constructor of class
-   */
   constructor(props) {
     super(props);
     this.state                   = {orderItems: null, phoneNumber: '', comment: '', status: 'Новый', date: '', time: '', redirect: false};
@@ -18,13 +13,8 @@ export default class OrderDetailsForm extends React.Component {
     this.handlePhoneNumberChange = this.handlePhoneNumberChange.bind(this);
     this.handleCommentChange     = this.handleCommentChange.bind(this);
     this.handleSubmit            = this.handleSubmit.bind(this);
-
   }
 
-  /**
-   * Renders component
-   * @returns rendered component
-   */
   render() {
     if (this.state.redirect) {
       return <Redirect push to="/orderCompleted"/>;
@@ -61,16 +51,6 @@ export default class OrderDetailsForm extends React.Component {
       </Container>
     );
   }
-
-  async handleSubmit(event) {
-    event.preventDefault();
-    await this.setOrderItems();
-    await this.setOrderDateTime();
-    this.saveOrder(this.state);
-    this.clearCart();
-    this.redirect();
-    return <AlertOrderCompleted/>
-  };
 
   saveOrder(orderDetails) {
     this.props.orderStore.create(orderDetails);
@@ -119,5 +99,13 @@ export default class OrderDetailsForm extends React.Component {
   redirect() {
     this.setState({redirect: true});
   }
-}
 
+  async handleSubmit(event) {
+    event.preventDefault();
+    await this.setOrderItems();
+    await this.setOrderDateTime();
+    this.saveOrder(this.state);
+    this.clearCart();
+    this.redirect();
+  };
+}

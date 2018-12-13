@@ -1,4 +1,4 @@
-import {observable, action} from "mobx";
+import {action, observable} from "mobx";
 
 const ORDER_ITEMS_URL = 'api/orderItems';
 
@@ -14,13 +14,6 @@ export default class OrderItemStore {
   shoppingCartItems = [];
 
   /**
-   * Contains all orders items
-   * @type {Array}
-   */
-  @observable
-  orderItems = [];
-
-  /**
    * Add order item to shopping cart
    * @param item
    */
@@ -29,38 +22,27 @@ export default class OrderItemStore {
     this.shoppingCartItems.push(item);
   }
 
+  /**
+   * Delete order item from shopping cart
+   * @param item
+   */
   @action
   deleteFromShoppingCart(item) {
     this.shoppingCartItems.splice(this.shoppingCartItems.indexOf(item), 1);
   }
 
+  /**
+   * Load all orderItems of order
+   * @param orderId
+   */
   loadAllOfOrder(orderId) {
     return fetch(ORDER_ITEMS_URL + "/" + orderId)
       .then(response => {
         return response.json();
       })
       .then(orderItems => {
-        console.log(orderItems);
         return orderItems;
-      });
-  }
-
-  /**
-   * Find all items by order id
-   * @param orderId
-   */
-  findAllItemsByOrderId(orderId) {
-    console.log(this.orderItems);
-    return this.orderItems.filter(({order:{id}}) => id === orderId);
-  }
-
-  /**
-   * Load all orderItems
-   */
-  loadAll() {
-    fetch(ORDER_ITEMS_URL)
-      .then(response => response.json())
-      .then(action(orderItems => this.orderItems = orderItems))
-      .catch(error => console.error(error.message))
+      })
+      .catch(error => console.error(error.message));
   }
 }

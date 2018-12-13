@@ -1,4 +1,4 @@
-import {observable, action} from "mobx";
+import {action, observable} from "mobx";
 
 const PRODUCTS_URL = 'api/products';
 
@@ -27,7 +27,7 @@ export default class ProductStore {
     fetch(PRODUCTS_URL, params)
       .then(response => response.json())
       .then(action(product => this.products.push(product)))
-      .catch(e => console.log(e));
+      .catch(error => console.log(error));
   }
 
   /**
@@ -47,7 +47,7 @@ export default class ProductStore {
   delete(id) {
     fetch(PRODUCTS_URL + "/" + id, {method: 'DELETE'})
       .then(() => this.deleteHandler(id))
-      .catch(e => console.error(e.message))
+      .catch(error => console.error(error.message))
   }
 
   /**

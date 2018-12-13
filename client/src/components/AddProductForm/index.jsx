@@ -1,13 +1,11 @@
 import React from "react";
 import {inject, observer} from "mobx-react";
 import {Button, Card, CardBody, CardTitle, Col, Container, Form, FormGroup, Input, Label, Row} from 'reactstrap';
+import NoRightsMessage from '../NoRightsMessage';
 
-@inject('productStore','userAuthStore')
+@inject('productStore', 'userAuthStore')
 @observer
 export default class AddProductForm extends React.Component {
-  /**
-   * Constructor of class
-   */
   constructor(props) {
     super(props);
     this.state = {title: '', ingredients: '', price: '', weight: ''};
@@ -19,18 +17,9 @@ export default class AddProductForm extends React.Component {
     this.handleSubmit            = this.handleSubmit.bind(this);
   }
 
-  /**
-   * Renders component
-   * @returns rendered component
-   */
   render() {
     if (this.props.userAuthStore.user == null) {
-      return (
-        <div>
-          <h5>У Вас недостаточно прав для просмотра данной страницы</h5>
-          <Button color="secondary" size="lg" block href="#/login">Войти</Button>
-        </div>
-      )
+      return <NoRightsMessage/>
     }
     return (
       <Container>
@@ -69,51 +58,28 @@ export default class AddProductForm extends React.Component {
       ;
   }
 
-  /**
-   * Handles changes in title input field
-   * @param event
-   */
   handleTitleChange(event) {
     this.setState({title: event.target.value});
   }
 
-  /**
-   * Handles changes in ingredients input field
-   * @param event
-   */
   handleIngredientsChange(event) {
     this.setState({ingredients: event.target.value});
   }
 
-  /**
-   * Handles changes in price input field
-   * @param event
-   */
   handlePriceChange(event) {
     this.setState({price: event.target.value});
   }
 
-  /**
-   * Handles changes in weight input field
-   * @param event
-   */
   handleWeightChange(event) {
     this.setState({weight: event.target.value});
   }
 
-  /**
-   * Handles form submit
-   * @param event
-   */
   handleSubmit(event) {
     event.preventDefault();
     this.props.productStore.create(this.state);
     this.setState({title: '', ingredients: '', price: '', weight: ''});
   }
 
-  /**
-   * Checks state of required fields
-   */
   checkRequiredFieldsState() {
     let state = this.state;
     return !(state.title && state.ingredients && state.price && state.weight);

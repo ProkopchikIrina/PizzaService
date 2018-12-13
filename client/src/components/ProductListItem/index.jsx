@@ -1,27 +1,20 @@
 import React from "react";
 import {inject, observer} from "mobx-react/index";
-import {Button, Input, Tooltip} from 'reactstrap';
+import {Button, Input} from 'reactstrap';
 import './style.css';
 
 @inject('orderItemStore')
 @observer
 export default class ProductsListItem extends React.Component {
-  /**
-   * Constructor of class
-   */
   constructor(props) {
     super(props);
     this.state             = {
-      count      : 1,
-      product    : this.props.product
+      count  : 1,
+      product: this.props.product
     };
     this.handleCountChange = this.handleCountChange.bind(this);
   }
 
-  /**
-   * Renders component
-   * @returns rendered component
-   */
   render() {
     return (
       <tr>
@@ -39,12 +32,6 @@ export default class ProductsListItem extends React.Component {
     this.setState({
       count: event.target.value
     })
-  }
-
-  getInitialState() {
-    this.setState({
-      count: 1
-    });
   }
 
   addToCart(product, count) {

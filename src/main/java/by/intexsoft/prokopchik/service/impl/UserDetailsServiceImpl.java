@@ -19,12 +19,16 @@ import java.util.Set;
  */
 @Service
 public class UserDetailsServiceImpl implements UserDetailsService {
-    @Autowired
     private IUserService userService;
 
-//    public UserDetailsServiceImpl(UserService userService) {
-//        this.userService = userService;
-//    }
+    /**
+     * Constructor of class
+     *
+     * @param userService user service
+     */
+    public UserDetailsServiceImpl(UserService userService) {
+        this.userService = userService;
+    }
 
     /**
      * Load user by username

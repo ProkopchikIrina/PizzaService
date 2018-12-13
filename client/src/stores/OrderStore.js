@@ -1,4 +1,4 @@
-import {observable, action} from "mobx";
+import {action, observable} from "mobx";
 
 const ORDERS_URL = 'api/orders';
 
@@ -45,7 +45,12 @@ export default class OrderStore {
    * @param status
    */
   updateOrderStatus(id, status) {
-    fetch(ORDERS_URL, {method: 'PUT', body: JSON.stringify({id: id, status: status}), headers: {'Content-Type': 'application/json'}})
+    const params = {
+      method : 'PUT',
+      body   : JSON.stringify({id: id, status: status}),
+      headers: {'Content-Type': 'application/json'}
+    };
+    fetch(ORDERS_URL, params)
       .catch(e => console.error(e.message))
   }
 }

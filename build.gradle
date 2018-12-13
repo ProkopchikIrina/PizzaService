@@ -21,7 +21,6 @@ dependencies {
     compile group: 'org.springframework.security', name: 'spring-security-web', version: '5.0.7.RELEASE'
     compile group: 'org.slf4j', name: 'slf4j-api', version: '1.7.25'
     compile group: 'org.projectlombok', name: 'lombok', version: '1.18.2'
-    compile group: 'com.fasterxml.jackson.core', name: 'jackson-databind', version: '2.9.7'
     compileOnly 'org.projectlombok:lombok:1.18.2'
     apt 'org.projectlombok:lombok:1.18.2'
 }

@@ -1,13 +1,11 @@
 import React from "react";
 import {inject, observer} from "mobx-react";
 import {Button, Card, CardBody, CardTitle, Col, Container, Form, FormGroup, Input, Label, Row} from 'reactstrap';
+import NoRightsMessage from '../NoRightsMessage';
 
-@inject('userStore','userAuthStore')
+@inject('userStore', 'userAuthStore')
 @observer
 export default class UserCreationForm extends React.Component {
-  /**
-   * Constructor of class
-   */
   constructor(props) {
     super(props);
     this.state                = {username: '', password: '', email: '', role: {id: 1}};
@@ -18,18 +16,9 @@ export default class UserCreationForm extends React.Component {
     this.handleSubmit         = this.handleSubmit.bind(this);
   }
 
-  /**
-   * Renders component
-   * @returns rendered component
-   */
   render() {
     if (this.props.userAuthStore.user == null) {
-      return (
-        <div>
-          <h5>У Вас недостаточно прав для просмотра данной страницы</h5>
-          <Button color="secondary" size="lg" block href="#/login">Войти</Button>
-        </div>
-      )
+      return <NoRightsMessage/>
     }
     return (
       <Container>
@@ -70,51 +59,28 @@ export default class UserCreationForm extends React.Component {
     );
   }
 
-  /**
-   * Handles changes in username input field
-   * @param event
-   */
   handleUsernameChange(event) {
     this.setState({username: event.target.value});
   }
 
-  /**
-   * Handles changes in password input field
-   * @param event
-   */
   handlePasswordChange(event) {
     this.setState({password: event.target.value});
   }
 
-  /**
-   * Handles changes in email input field
-   * @param event
-   */
   handleEmailChange(event) {
     this.setState({email: event.target.value});
   }
 
-  /**
-   * Handles changes in role input field
-   * @param event
-   */
   handleRoleChange(event) {
-    this.setState({role: {id:parseInt(event.target.value, 10)}});
+    this.setState({role: {id: parseInt(event.target.value, 10)}});
   }
 
-  /**
-   * Handles form submit
-   * @param event
-   */
   handleSubmit(event) {
     event.preventDefault();
     this.props.userStore.create(this.state);
     this.setState({username: '', password: '', email: '', role: {id: 1}});
   }
 
-  /**
-   * Checks state of required fields
-   */
   checkRequiredFieldsState() {
     let state = this.state;
     return !(state.username && state.password && state.email);

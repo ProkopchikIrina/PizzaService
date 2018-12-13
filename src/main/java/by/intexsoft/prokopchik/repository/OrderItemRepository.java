@@ -12,7 +12,10 @@ import java.util.List;
  * Spring Data JPA repository for {@link OrderItem} entity
  */
 public interface OrderItemRepository extends JpaRepository<OrderItem, Integer> {
+    /**
+     * Find all items of order
+     * @param id of order
+     * @return items of order
+     */
     List<OrderItem> findAllByOrder_Id(Integer id);
-//    @Query("SELECT item FROM OrderItem item WHERE item.orderId=:orderId")
-//    List<OrderItem> findAllByOrderId(@Param("orderId") Integer orderId);
 }

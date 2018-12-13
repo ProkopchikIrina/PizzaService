@@ -20,16 +20,18 @@ public class OrderController {
 
     /**
      * Constructor of class
+     *
      * @param orderService order service
      */
     public OrderController(OrderService orderService) {
         this.orderService = orderService;
     }
+
     /**
      * Get all orders
      */
     @GetMapping
-    public List<Order> findAll(){
+    public List<Order> findAll() {
         log.info("Find all orders");
         return orderService.findAll();
     }
@@ -48,7 +50,7 @@ public class OrderController {
      */
     @PutMapping
     public void updateStatus(@RequestBody Order order) {
-        log.info("Created new order with address: {}", order.getId());
+        log.info("Updated status {} for order with id: {}", order.status, order.getId());
         orderService.updateStatus(order.getId(), order.status);
     }
 }

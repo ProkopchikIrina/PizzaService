@@ -7,19 +7,11 @@ import ProductsListItem from '../ProductListItem'
 @inject('productStore')
 @observer
 export default class ProductsList extends React.Component {
-
-  /**
-   * Constructor of class
-   */
   constructor(props) {
     super(props);
     this.loadAll();
   }
 
-  /**
-   * Renders component
-   * @returns rendered component
-   */
   render() {
     const {props: {productStore: {products}}} = this;
     return (

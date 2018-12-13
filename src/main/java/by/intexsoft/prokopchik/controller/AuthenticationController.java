@@ -29,7 +29,6 @@ public class AuthenticationController {
 
     /**
      * Performing user authentication
-     * @param authentication
      */
     @GetMapping
     public by.intexsoft.prokopchik.entity.User login(Authentication authentication) {

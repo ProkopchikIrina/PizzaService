@@ -45,6 +45,12 @@ public class Order extends AbstractPersistable<Integer> {
     public String status;
 
     /**
+     * Contains comment of order
+     */
+    @Column
+    public String comment;
+
+    /**
      * Contains order items
      */
     @JsonBackReference

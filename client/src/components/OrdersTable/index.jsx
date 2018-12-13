@@ -1,25 +1,22 @@
 import React from "react";
 import {inject, observer} from "mobx-react/index";
-import {Table} from 'reactstrap';
+import {Button, Table} from 'reactstrap';
 
 import OrdersTableRow from '../OrdersTableRow'
+import NoRightsMessage from '../NoRightsMessage';
 
-@inject('orderStore')
+@inject('orderStore', 'userAuthStore')
 @observer
 export default class OrdersTable extends React.Component {
-  /**
-   * Constructor of class
-   */
   constructor(props) {
     super(props);
     this.loadAll();
   }
 
-  /**
-   * Renders component
-   * @returns rendered component
-   */
   render() {
+    if (this.props.userAuthStore.user == null) {
+      return <NoRightsMessage/>
+    }
     const {props: {orderStore: {orders}}} = this;
     return (
       <Table>
@@ -30,7 +27,7 @@ export default class OrdersTable extends React.Component {
           <th>Адрес доставки</th>
           <th>Номер телефона</th>
           <th>Элементы заказа</th>
-          <th>Статус</th>
+          <th>Комментарий</th>
         </tr>
         </thead>
         {orders.map((order) => (<OrdersTableRow order={order}/>))}

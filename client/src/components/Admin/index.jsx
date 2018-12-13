@@ -1,22 +1,14 @@
 import React from "react";
 import {Button, Col, Container, Row} from 'reactstrap';
 import {inject, observer} from 'mobx-react/index';
+import NoRightsMessage from '../NoRightsMessage';
 
 @inject('userAuthStore')
 @observer
 export default class Admin extends React.Component {
-  /**
-   * Renders component
-   * @returns rendered component
-   */
   render() {
     if (this.props.userAuthStore.user == null) {
-      return (
-        <div>
-          <h5>У Вас недостаточно прав для просмотра данной страницы</h5>
-          <Button color="secondary" size="lg" block href="#/login">Войти</Button>
-        </div>
-      )
+      return <NoRightsMessage/>
     }
     return (
       <Container>

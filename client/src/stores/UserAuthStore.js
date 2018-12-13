@@ -1,6 +1,6 @@
 import {action, observable} from "mobx";
 
-const LOGIN_URL = 'loginHandler';
+const LOGIN_URL  = 'loginHandler';
 const LOGOUT_URL = 'logout';
 /**
  * Store for working with user's authentication

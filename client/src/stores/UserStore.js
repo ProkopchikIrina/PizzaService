@@ -1,4 +1,4 @@
-import {observable, action} from "mobx";
+import {action, observable} from "mobx";
 
 const USERS_URL = 'api/users';
 

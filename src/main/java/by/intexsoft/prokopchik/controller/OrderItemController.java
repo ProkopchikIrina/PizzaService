@@ -20,7 +20,6 @@ public class OrderItemController {
 
     /**
      * Constructor of class
-     *
      * @param orderItemService order item service
      */
     public OrderItemController(OrderItemService orderItemService) {

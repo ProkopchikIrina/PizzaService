@@ -1,12 +1,7 @@
 import React from "react";
-
 import {Alert} from 'reactstrap';
 
 export default class AlertOrderCompleted extends React.Component {
-  /**
-   * Renders component
-   * @returns rendered component
-   */
   render() {
     return (
       <Alert color="success">
