@@ -34,4 +34,9 @@ public class Product extends AbstractPersistable<Integer> {
     @Column
     public float price;
 
+    /**
+     * Contains image url of product
+     */
+    @Column
+    public String image;
 }

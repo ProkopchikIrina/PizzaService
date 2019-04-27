@@ -1,6 +1,6 @@
 import {action, observable} from "mobx";
 
-const LOGIN_URL  = 'loginHandler';
+const LOGIN_URL  = 'http://localhost:8080/PizzaService/loginHandler';
 const LOGOUT_URL = 'logout';
 /**
  * Store for working with user's authentication
@@ -27,7 +27,7 @@ export default class UserAuthStore {
       body   : this.formRequestBody(userParams),
       headers: {'Content-Type': 'application/x-www-form-urlencoded; charset=UTF-8'}
     };
-    this.completeRequest(params);
+    return this.completeRequest(params);
   }
 
   /**
@@ -35,7 +35,7 @@ export default class UserAuthStore {
    * @param params
    */
   completeRequest(params) {
-    fetch(LOGIN_URL, params)
+    return fetch(LOGIN_URL, params)
       .then(response => response.json())
       .then(action(user => {
         this.user = user;

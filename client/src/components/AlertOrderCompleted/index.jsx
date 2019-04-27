@@ -11,7 +11,7 @@ export default class AlertOrderCompleted extends React.Component {
         </p>
         <hr/>
         <p className="mb-0">
-          Если этого не произошло перезвоните по телефону +375251234567
+          Если этого не произошло, перезвоните по телефону +375251234567
         </p>
       </Alert>
     );

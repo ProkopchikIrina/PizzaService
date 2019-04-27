@@ -96,16 +96,17 @@ export default class OrderDetailsForm extends React.Component {
     this.props.orderItemStore.shoppingCartItems = [];
   }
 
-  redirect() {
-    this.setState({redirect: true});
-  }
-
   async handleSubmit(event) {
-    event.preventDefault();
-    await this.setOrderItems();
-    await this.setOrderDateTime();
-    this.saveOrder(this.state);
-    this.clearCart();
-    this.redirect();
+    await event.preventDefault();
+    try {
+      await this.setOrderItems();
+      await this.setOrderDateTime();
+      await this.saveOrder(this.state);
+      await this.clearCart();
+      await this.props.history.push('/orderCompleted');
+    }
+    catch (e) {
+      alert(e.message);
+    }
   };
 }

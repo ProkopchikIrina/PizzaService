@@ -2,6 +2,7 @@ import React from "react";
 import {inject, observer} from "mobx-react/index";
 import {Button, Input} from 'reactstrap';
 import './style.css';
+import ShowImage from "../ShowImage";
 
 @inject('orderItemStore')
 @observer
@@ -18,6 +19,7 @@ export default class ProductsListItem extends React.Component {
   render() {
     return (
       <tr>
+        <ShowImage image = {this.state.product.image} productId = {this.state.product.id}/>
         <td>{this.state.product.title}</td>
         <td>{this.state.product.ingredients}</td>
         <td>{this.state.product.price} б. р.</td>
