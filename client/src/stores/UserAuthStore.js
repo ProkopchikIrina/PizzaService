@@ -10,7 +10,7 @@ export default class UserAuthStore {
    * Contains authenticated user
    */
   @observable
-  user = null;
+  user = JSON.parse(sessionStorage.getItem('user'));
 
   /**
    * Sing-in method
@@ -38,6 +38,7 @@ export default class UserAuthStore {
     return fetch(LOGIN_URL, params)
       .then(response => response.json())
       .then(action(user => {
+        sessionStorage.setItem('user', JSON.stringify(user));
         this.user = user;
         console.log(user.username);
       }))
@@ -61,7 +62,10 @@ export default class UserAuthStore {
    */
   logOut() {
     fetch(LOGOUT_URL, {method: 'GET'})
-      .then(() => this.user = null)
+      .then(() => {
+          this.user = null;
+          sessionStorage.clear();
+      })
       .catch(e => console.log(e));
   }
 }

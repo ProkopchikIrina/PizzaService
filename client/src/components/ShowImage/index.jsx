@@ -16,7 +16,7 @@ export default class ShowImage extends React.Component {
     constructor (props) {
         super(props);
         this.state = {
-            imageSrc: '',
+            imageSrc: '',//#' + this.state.productId
             productId: this.props.productId
         };
 
@@ -24,25 +24,23 @@ export default class ShowImage extends React.Component {
     }
 
     getImage (image) {
-        if(!image) {
-            image = 'DEFAULT.png'
-        }
+        // if(!image) {
+        //     image = 'DEFAULT.png'
+        // }
+            let {state} = this;
             storage.child(`${image}`).getDownloadURL().then((url) => {
-                this.setState({
-                    imageSrc: url + '?alt=media&token=' + url.downloadTokens
-                });
-                document.querySelector('img#' + this.state.productId).src = url;
-                console.log('src' + this.state.imageSrc);
-                console.log('url' + url);
+                state[image] = url + '?alt=media&token=' + url.downloadTokens;
+                document.getElementById(this.state.productId).src = url;
+                this.setState(state);
+                console.log(url);
+                console.log(this.state.imageSrc);
             }).catch((error) => {
             })
     }
 
     render() {
         return (
-            <div>
-                <img alt="Image" width="100" height="100" id = {this.state.productId}/>
-            </div>
+            <img onLoad={this.getImage(this.props.image)} src={ this.state.imageSrc } alt="Image" width="100" height="100" id = {this.state.productId}/>
         );
     }
 }
