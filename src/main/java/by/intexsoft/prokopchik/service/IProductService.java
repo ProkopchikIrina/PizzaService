@@ -18,7 +18,7 @@ public interface IProductService {
     /**
      * Delete {@link Product} by id
      *
-     * @param id deleted user id
+     * @param id deleted product id
      */
     void delete(int id);
 

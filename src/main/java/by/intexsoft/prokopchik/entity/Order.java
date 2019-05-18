@@ -57,4 +57,10 @@ public class Order extends AbstractPersistable<Integer> {
     @OneToMany(fetch = FetchType.EAGER,cascade=CascadeType.ALL)
     @JoinColumn(name = "order_id", referencedColumnName = "id")
     public List<OrderItem> orderItems;
+
+    /*
+    * Contains positions, created by constructor
+    */
+    @Column
+    public String constructor;
 }

@@ -11,6 +11,7 @@ import ProductStore from './stores/ProductStore';
 import OrderStore from './stores/OrderStore';
 import OrderItemStore from './stores/OrderItemStore';
 import RoleStore from './stores/RoleStore';
+import IngredientStore from "./stores/IngredientStore";
 
 const stores = {
   userAuthStore : new UserAuthStore(),
@@ -18,7 +19,8 @@ const stores = {
   productStore  : new ProductStore(),
   orderStore    : new OrderStore(),
   orderItemStore: new OrderItemStore(),
-  roleStore     : new RoleStore()
+  roleStore     : new RoleStore(),
+    ingredientStore: new IngredientStore()
 };
 
 ReactDOM.render(

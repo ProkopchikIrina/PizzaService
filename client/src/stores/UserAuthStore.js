@@ -10,21 +10,25 @@ export default class UserAuthStore {
    * Contains authenticated user
    */
   @observable
-  user = JSON.parse(sessionStorage.getItem('user'));
+  user = JSON.parse(sessionStorage.getItem('userParams'));
 
+  userParams = {
+    username: '',
+    password: '',
+  };
   /**
    * Sing-in method
    * @param username
    * @param password
    */
   signIn(username, password) {
-    const userParams = {
+    this.userParams = {
       username: username,
       password: password,
     };
     const params     = {
       method : 'POST',
-      body   : this.formRequestBody(userParams),
+      body   : this.formRequestBody(this.userParams),
       headers: {'Content-Type': 'application/x-www-form-urlencoded; charset=UTF-8'}
     };
     return this.completeRequest(params);
@@ -41,6 +45,7 @@ export default class UserAuthStore {
         sessionStorage.setItem('user', JSON.stringify(user));
         this.user = user;
         console.log(user.username);
+        sessionStorage.setItem('userParams', JSON.stringify(this.userParams));
       }))
       .catch(console.log);
   }

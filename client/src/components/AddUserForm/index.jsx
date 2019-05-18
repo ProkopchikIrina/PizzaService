@@ -44,7 +44,7 @@ export default class UserCreationForm extends React.Component {
                   </FormGroup>
                   <FormGroup>
                     <Label for="role">Роль</Label>
-                    <Input type="select" name="role" id="role" placeholder="Введите e-mail" onChange={this.handleRoleChange}>
+                    <Input type="select" name="role" id="role" onChange={this.handleRoleChange}>
                       <option value={1}>Администратор</option>
                       <option value={2}>Водитель</option>
                     </Input>

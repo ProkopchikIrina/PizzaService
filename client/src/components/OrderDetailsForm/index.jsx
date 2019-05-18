@@ -2,13 +2,14 @@ import React from "react";
 import {inject, observer} from "mobx-react/index";
 import {Redirect} from "react-router";
 import {Button, Card, CardBody, CardTitle, Col, Container, Form, FormGroup, Input, Label, Row} from 'reactstrap';
+import ShoppingCartItem from "../ShoppingCart";
 
-@inject('orderItemStore', 'orderStore')
+@inject('orderItemStore','ingredientStore', 'orderStore')
 @observer
 export default class OrderDetailsForm extends React.Component {
   constructor(props) {
     super(props);
-    this.state                   = {orderItems: null, phoneNumber: '', comment: '', status: 'Новый', date: '', time: '', redirect: false};
+    this.state                   = {orderItems: null, phoneNumber: '', comment: '', status: 'Новый', date: '', time: '', redirect: false, constructor:''};
     this.handleAddressChange     = this.handleAddressChange.bind(this);
     this.handlePhoneNumberChange = this.handlePhoneNumberChange.bind(this);
     this.handleCommentChange     = this.handleCommentChange.bind(this);
@@ -89,11 +90,16 @@ export default class OrderDetailsForm extends React.Component {
 
   setOrderItems() {
     const {props: {orderItemStore: {shoppingCartItems}}} = this;
+    const {props: {orderItemStore: {constructorItems}}} = this;
     this.setState({orderItems: shoppingCartItems});
+    let constructor = '';
+    constructorItems.map(({product, count}) => (constructor+=product.title+'*'+count+ product.ingredients+' '+ product.weight+ ' '+product.price));
+    this.setState({constructor: constructor});
   }
 
   clearCart() {
     this.props.orderItemStore.shoppingCartItems = [];
+    this.props.ingredientStore.selectedIngredients = [];
   }
 
   async handleSubmit(event) {

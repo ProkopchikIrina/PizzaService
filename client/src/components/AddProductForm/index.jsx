@@ -38,7 +38,7 @@ export default class AddProductForm extends React.Component {
                            onChange={this.handleTitleChange}/>
                   </FormGroup>
                   <FormGroup>
-                    <Label for="examplePassword">Состав</Label>
+                    <Label for="ingredients">Состав</Label>
                     <Input type="text" name="ingredients" id="examplePassword" placeholder="Введите состав" value={this.state.product.ingredients}
                            onChange={this.handleIngredientsChange}/>
                   </FormGroup>
@@ -104,8 +104,7 @@ export default class AddProductForm extends React.Component {
             console.log(res);
         }
     );
-
-    this.state = {product: {title: '', ingredients: '', price: '', weight: '', image: ''}, images: [] };
+    this.setState({product: {title: '', ingredients: '', price: '', weight: '', image: ''}, images: [] });
   }
 
   checkRequiredFieldsState() {

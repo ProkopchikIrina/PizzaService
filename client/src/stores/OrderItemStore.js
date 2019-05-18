@@ -7,11 +7,18 @@ const ORDER_ITEMS_URL = 'api/orderItems';
  */
 export default class OrderItemStore {
   /**
-   * Contains stored shoppingCartItems
+   * Contains stored shopping cart items
    * @type {Array}
    */
   @observable
   shoppingCartItems = [];
+
+  /**
+   * Contains stored constructor items
+   * @type {Array}
+   */
+  @observable
+  constructorItems = [];
 
   /**
    * Add order item to shopping cart
@@ -20,6 +27,15 @@ export default class OrderItemStore {
   @action
   addToShoppingCart(item) {
     this.shoppingCartItems.push(item);
+  }
+
+  /**
+   * Add order item to shopping cart
+   * @param item
+   */
+  @action
+  addToConstructorStoredItems(item) {
+    this.constructorItems.push(item);
   }
 
   /**

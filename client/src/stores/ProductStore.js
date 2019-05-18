@@ -34,9 +34,13 @@ export default class ProductStore {
    * Load all products
    */
   loadAll() {
-    fetch(PRODUCTS_URL)
+    return fetch(PRODUCTS_URL)
       .then(response => response.json())
-      .then(action(products => this.products = products))
+      .then(action(
+          products => {
+            this.products = products;
+            console.log('ok');
+          }))
       .catch(error => console.error(error.message))
   }
 

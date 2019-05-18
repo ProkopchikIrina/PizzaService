@@ -27,6 +27,7 @@ export default class OrdersTable extends React.Component {
           <th>Адрес доставки</th>
           <th>Номер телефона</th>
           <th>Элементы заказа</th>
+          <th>Конструктор</th>
           <th>Комментарий</th>
         </tr>
         </thead>

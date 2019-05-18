@@ -25,7 +25,9 @@ export default class OrdersTableRow extends React.Component {
         <td> {this.state.order.address}</td>
         <td> {this.state.order.phoneNumber}</td>
         <td> {this.state.orderItems.map((item) => <OrderItem orderItem={item}/>)}</td>
-        <td> {this.state.order.comment}</td>
+          <td> {this.state.order.constructor}</td>
+
+          <td> {this.state.order.comment}</td>
       </tr>)
   }
 }

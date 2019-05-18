@@ -17,6 +17,8 @@ export default class Admin extends React.Component {
             <Button color="secondary" size="lg" block href='#/addUser'>Добавить пользователя</Button>
             <Button color="secondary" size="lg" block href='#/addProduct'>Добавить продукт</Button>
             <Button color="secondary" size="lg" block href='#/usersTable'>Список пользователей</Button>
+            <Button color="secondary" size="lg" block href='#/addIngredient'>Добавить ингредиент</Button>
+            <Button color="secondary" size="lg" block href='#/ingredientsTable'>Список ингредиентов</Button>
           </Col>
         </Row>
       </Container>
